@@ -220,6 +220,18 @@ export default class Equalizer extends Component {
 		);
 	}
 
+	getOpacity = (amp, step, index) => {
+		const stepOpacity = parseInt(
+			((step * (index + 2) - amp + this.state.cutOffAmplitude) * 255) / step
+		);
+
+		const log2 = parseInt((Math.log2(amp) / 8) * 255);
+		const linear = parseInt(amp);
+
+		const opacity = Math.max(255 * 0.5, linear);
+		return opacity.toString(16);
+	};
+
 	drawVisualizer = () => {
 		requestAnimationFrame(this.drawVisualizer);
 
